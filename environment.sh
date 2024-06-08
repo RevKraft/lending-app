@@ -9,7 +9,7 @@ export PROJECT_NAME="Lending App"
 export STACK_NAME=lending-app
 
 # Backend
-export BACKEND_CORS_ORIGINS="http://localhost,http://localhost:5173,https://localhost,https://localhost:5173,http://localhost.tiangolo.com,http://ec2-3-22-252-63.us-east-2.compute.amazonaws.com,https://ec2-3-22-252-63.us-east-2.compute.amazonaws.com"
+export BACKEND_CORS_ORIGINS="http://localhost,http://localhost:5173,https://localhost,https://localhost:5173,http://localhost.tiangolo.com,http://ec2-3-22-252-63.us-east-2.compute.amazonaws.com,https://ec2-3-22-252-63.us-east-2.compute.amazonaws.com,*"
 export SECRET_KEY=9aVxo54yEij2k6y92EFyzCzrZNikUUGXG8403Jc0heg
 export FIRST_SUPERUSER=ramiro.velez.koeppel@gmail.com
 export FIRST_SUPERUSER_PASSWORD=Pass1234**
