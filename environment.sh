@@ -36,7 +36,7 @@ export SENTRY_DSN=
 export DOCKER_IMAGE_BACKEND=backend
 export DOCKER_IMAGE_FRONTEND=frontend
 
-# traefik
+# Traefik
 export USERNAME=ramiro.velez.koeppel@gmail.com
 export PASSWORD=Pass1234**
 export HASHED_PASSWORD=$(openssl passwd -apr1 $PASSWORD)
