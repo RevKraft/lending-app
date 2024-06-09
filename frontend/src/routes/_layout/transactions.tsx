@@ -21,10 +21,10 @@ import {
   import Navbar from "../../components/Common/Navbar"
   
   export const Route = createFileRoute("/_layout/transactions")({
-    component: Items,
+    component: Transactions,
   })
   
-  function ItemsTableBody() {
+  function TransactionsTableBody() {
     const { data: items } = useSuspenseQuery({
       queryKey: ["items"],
       queryFn: () => ItemsService.readItems({}),
@@ -47,7 +47,7 @@ import {
       </Tbody>
     )
   }
-  function ItemsTable() {
+  function TransactionsTable() {
     return (
       <TableContainer>
         <Table size={{ base: "sm", md: "md" }}>
@@ -85,7 +85,7 @@ import {
                 </Tbody>
               }
             >
-              <ItemsTableBody />
+              <TransactionsTableBody />
             </Suspense>
           </ErrorBoundary>
         </Table>
@@ -93,15 +93,15 @@ import {
     )
   }
   
-  function Items() {
+  function Transactions() {
     return (
       <Container maxW="full">
         <Heading size="lg" textAlign={{ base: "center", md: "left" }} pt={12}>
-          Items Management
+          Transactions Management
         </Heading>
   
         <Navbar type={"Item"} />
-        <ItemsTable />
+        <TransactionsTable />
       </Container>
     )
   }
