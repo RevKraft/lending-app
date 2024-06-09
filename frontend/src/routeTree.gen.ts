@@ -67,6 +67,11 @@ const LayoutAdminRoute = LayoutAdminImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutTransactionsRoute = LayoutTransactionsImport.update({
+  path: '/transactions',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -97,6 +102,10 @@ declare module '@tanstack/react-router' {
     }
     '/_layout/items': {
       preLoaderRoute: typeof LayoutItemsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/transactions': {
+      preLoaderRoute: typeof LayoutTransactionsImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/settings': {
