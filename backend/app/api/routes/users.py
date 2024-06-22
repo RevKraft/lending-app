@@ -22,6 +22,7 @@ from app.models import (
     UsersPublic,
     UserUpdate,
     UserUpdateMe,
+    Transaction,
 )
 from app.utils import generate_new_account_email, send_email
 
@@ -135,6 +136,8 @@ def delete_user_me(session: SessionDep, current_user: CurrentUser) -> Any:
         )
     statement = delete(Item).where(col(Item.owner_id) == current_user.id)
     session.exec(statement)  # type: ignore
+    statement = delete(Transaction).where(col(Transaction.owner_id) == current_user.id)
+    session.exec(statement)  # type: ignore
     session.delete(current_user)
     session.commit()
     return Message(message="User deleted successfully")
@@ -226,6 +229,8 @@ def delete_user(
             status_code=403, detail="Super users are not allowed to delete themselves"
         )
     statement = delete(Item).where(col(Item.owner_id) == user_id)
+    session.exec(statement)  # type: ignore
+    statement = delete(Transaction).where(col(Transaction.owner_id) == user_id)
     session.exec(statement)  # type: ignore
     session.delete(user)
     session.commit()

@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa"
 
 import AddUser from "../Admin/AddUser"
 import AddItem from "../Items/AddItem"
+import AddTransaction from "../Transactions/AddTransaction"
 
 interface NavbarProps {
   type: string
@@ -11,6 +12,18 @@ interface NavbarProps {
 const Navbar = ({ type }: NavbarProps) => {
   const addUserModal = useDisclosure()
   const addItemModal = useDisclosure()
+  const addTransactionModal = useDisclosure()
+
+  const handleButtonClick = () => {
+    console.log('Button clicked, type:', type);
+    if (type === "User") {
+      addUserModal.onOpen();
+    } else if (type === "Item") {
+      addItemModal.onOpen();
+    } else if (type === "Transaction") {
+      addTransactionModal.onOpen();
+    }
+  };
 
   return (
     <>
@@ -26,12 +39,12 @@ const Navbar = ({ type }: NavbarProps) => {
           variant="primary"
           gap={1}
           fontSize={{ base: "sm", md: "inherit" }}
-          onClick={type === "User" ? addUserModal.onOpen : addItemModal.onOpen}
-        >
+          onClick={handleButtonClick}>
           <Icon as={FaPlus} /> Add {type}
         </Button>
         <AddUser isOpen={addUserModal.isOpen} onClose={addUserModal.onClose} />
         <AddItem isOpen={addItemModal.isOpen} onClose={addItemModal.onClose} />
+        <AddTransaction isOpen={addTransactionModal.isOpen} onClose={addTransactionModal.onClose} />
       </Flex>
     </>
   )

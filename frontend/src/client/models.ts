@@ -44,6 +44,35 @@ export type ItemsPublic = {
 };
 
 
+export type TransactionCreate = {
+	title: string;
+	description?: string | null;
+};
+
+
+
+export type TransactionPublic = {
+	title: string;
+	description?: string | null;
+	id: number;
+	owner_id: number;
+};
+
+
+
+export type TransactionUpdate = {
+	title?: string | null;
+	description?: string | null;
+};
+
+
+
+export type TransactionsPublic = {
+	data: Array<TransactionPublic>;
+	count: number;
+};
+
+
 
 export type Message = {
 	message: string;

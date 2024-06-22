@@ -16,8 +16,7 @@ import {
   
   import { Suspense } from "react"
   import { ErrorBoundary } from "react-error-boundary"
-  import { ItemsService } from "../../client"
-  import ActionsMenu from "../../components/Common/ActionsMenu"
+  import { TransactionsService } from "../../client"
   import Navbar from "../../components/Common/Navbar"
   
   export const Route = createFileRoute("/_layout/transactions")({
@@ -25,22 +24,19 @@ import {
   })
   
   function TransactionsTableBody() {
-    const { data: items } = useSuspenseQuery({
-      queryKey: ["items"],
-      queryFn: () => ItemsService.readItems({}),
+    const { data: transactions } = useSuspenseQuery({
+      queryKey: ["transactions"],
+      queryFn: () => TransactionsService.readTransactions({}),
     })
   
     return (
       <Tbody>
-        {items.data.map((item) => (
-          <Tr key={item.id}>
-            <Td>{item.id}</Td>
-            <Td>{item.title}</Td>
-            <Td color={!item.description ? "ui.dim" : "inherit"}>
-              {item.description || "N/A"}
-            </Td>
-            <Td>
-              <ActionsMenu type={"Item"} value={item} />
+        {transactions.data.map((transaction) => (
+          <Tr key={transaction.id}>
+            <Td>{transaction.id}</Td>
+            <Td>{transaction.title}</Td>
+            <Td color={!transaction.description ? "ui.dim" : "inherit"}>
+              {transaction.description || "N/A"}
             </Td>
           </Tr>
         ))}
@@ -99,8 +95,7 @@ import {
         <Heading size="lg" textAlign={{ base: "center", md: "left" }} pt={12}>
           Transactions Management
         </Heading>
-  
-        <Navbar type={"Item"} />
+        <Navbar type={"Transaction"} />
         <TransactionsTable />
       </Container>
     )
