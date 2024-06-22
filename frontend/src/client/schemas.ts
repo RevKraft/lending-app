@@ -130,6 +130,85 @@ export const $ItemsPublic = {
 	},
 } as const;
 
+export const $TransactionCreate = {
+	properties: {
+		title: {
+	type: 'string',
+	isRequired: true,
+},
+		description: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+	},
+} as const;
+
+export const $TransactionPublic = {
+	properties: {
+		title: {
+	type: 'string',
+	isRequired: true,
+},
+		description: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+		id: {
+	type: 'number',
+	isRequired: true,
+},
+		owner_id: {
+	type: 'number',
+	isRequired: true,
+},
+	},
+} as const;
+
+export const $TransactionUpdate = {
+	properties: {
+		title: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+		description: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+	},
+} as const;
+
+export const $TransactionsPublic = {
+	properties: {
+		data: {
+	type: 'array',
+	contains: {
+		type: 'TransactionPublic',
+	},
+	isRequired: true,
+},
+		count: {
+	type: 'number',
+	isRequired: true,
+},
+	},
+} as const;
+
 export const $Message = {
 	properties: {
 		message: {

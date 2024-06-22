@@ -7,8 +7,11 @@ import {
   Image,
   Input,
   FormLabel,
+  Center,
+  Link,
 } from "@chakra-ui/react"
 import {
+  Link as RouterLink,
   createFileRoute,
   redirect,
 } from "@tanstack/react-router"
@@ -104,6 +107,11 @@ function Signup() {
           alignSelf="center"
           mb={4}
         />
+        <Center>
+          <Link as={RouterLink} to="/login" color="blue.500">
+            User already created?
+          </Link>
+        </Center>  
         <FormControl isRequired isInvalid={!!errors.email}>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
@@ -171,7 +179,7 @@ function Signup() {
                   {errors.confirm_password.message}
                 </FormErrorMessage>
               )}
-            </FormControl>
+            </FormControl>  
         <Button variant="primary" type="submit" isLoading={isSubmitting} gap={1}
           fontSize={{ base: "sm", md: "inherit" }}>
           <Icon as={FaPlus} /> Add {"User"}

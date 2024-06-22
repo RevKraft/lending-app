@@ -2,7 +2,7 @@ import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
 
-import type { Body_login_login_access_token,Message,NewPassword,Token,UserPublic,UpdatePassword,UserCreate,UserRegister,UsersPublic,UserUpdate,UserUpdateMe,ItemCreate,ItemPublic,ItemsPublic,ItemUpdate } from './models';
+import type { Body_login_login_access_token,Message,NewPassword,Token,UserPublic,UpdatePassword,UserCreate,UserRegister,UsersPublic,UserUpdate,UserUpdateMe,ItemCreate,ItemPublic,ItemsPublic,ItemUpdate,TransactionCreate,TransactionPublic,TransactionsPublic,TransactionUpdate} from './models';
 
 export type TDataLoginAccessToken = {
                 formData: Body_login_login_access_token
@@ -534,4 +534,96 @@ id,
 		});
 	}
 
+}
+
+export type TDataReadTransactions = {
+	limit?: number
+skip?: number
+	
+}
+export type TDataCreateTransaction = {
+	requestBody: TransactionCreate
+	
+}
+export type TDataReadTransaction = {
+	id: number
+	
+}
+export type TDataUpdateTransaction = {
+	id: number
+requestBody: TransactionUpdate
+	
+}
+export type TDataDeleteTransaction = {
+	id: number
+	
+}
+
+export class TransactionsService {
+
+	/**
+	 * Read Transactions
+	 * Retrieve transactions.
+	 * @returns TransactionsPublic Successful Response
+	 * @throws ApiError
+	 */
+	public static readTransactions(data: TDataReadTransactions = {}): CancelablePromise<TransactionsPublic> {
+		const {
+limit = 100,
+skip = 0,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/v1/transactions/',
+			query: {
+				skip, limit
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * Create Transaction
+	 * Create new transaction.
+	 * @returns TransactionPublic Successful Response
+	 * @throws ApiError
+	 */
+	public static createTransaction(data: TDataCreateTransaction): CancelablePromise<TransactionPublic> {
+		const {
+requestBody,
+} = data;
+		return __request(OpenAPI, {
+			method: 'POST',
+			url: '/api/v1/transactions/',
+			body: requestBody,
+			mediaType: 'application/json',
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * Read Transaction
+	 * Get transaction by ID.
+	 * @returns TransactionPublic Successful Response
+	 * @throws ApiError
+	 */
+	public static readTransaction(data: TDataReadTransaction): CancelablePromise<TransactionPublic> {
+		const {
+id,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/v1/transactions/{id}',
+			path: {
+				id
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
 }
