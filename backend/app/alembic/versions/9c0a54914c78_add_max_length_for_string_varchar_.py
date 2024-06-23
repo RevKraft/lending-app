@@ -35,19 +35,9 @@ def upgrade():
                existing_type=sa.String(),
                type_=sa.String(length=255),
                existing_nullable=False)
-    
-    op.alter_column('transaction', 'title',
-               existing_type=sa.String(),
-               type_=sa.String(length=255),
-               existing_nullable=False)
 
     # Adjust the length of the description field in the Item/Transaction table
     op.alter_column('item', 'description',
-               existing_type=sa.String(),
-               type_=sa.String(length=255),
-               existing_nullable=True)
-    
-    op.alter_column('transaction', 'description',
                existing_type=sa.String(),
                type_=sa.String(length=255),
                existing_nullable=True)
@@ -71,19 +61,9 @@ def downgrade():
                existing_type=sa.String(length=255),
                type_=sa.String(),
                existing_nullable=False)
-    
-    op.alter_column('transaction', 'title',
-               existing_type=sa.String(length=255),
-               type_=sa.String(),
-               existing_nullable=False)
 
     # Revert the length of the description field in the Item/Transaction table
     op.alter_column('item', 'description',
-               existing_type=sa.String(length=255),
-               type_=sa.String(),
-               existing_nullable=True)
-    
-    op.alter_column('transaction', 'description',
                existing_type=sa.String(length=255),
                type_=sa.String(),
                existing_nullable=True)
