@@ -4,7 +4,7 @@
 python /app/app/backend_pre_start.py
 
 # Generate a new migration script
-#alembic revision --autogenerate -m "Add transaction relationship"
+alembic revision --autogenerate -m "Add transaction relationship"
 
 
 # Run migrations
