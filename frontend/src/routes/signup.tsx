@@ -68,13 +68,12 @@ function Signup() {
     mutationFn: (data: UserRegister) =>
       UsersService.registerUser({ requestBody: data }),
     onSuccess: () => {
-      //const navigate = useNavigate()
       showToast("Success!", "User created successfully.", "success")
       reset()
       navigate("/login")
     },
     onError: (err: ApiError) => {
-      const errDetail = (err.body as any)?.detail
+      const errDetail = (err.body as any)?.detail || err.message
       showToast("Something went wrong.", `${errDetail}`, "error")
     },
     onSettled: () => {
