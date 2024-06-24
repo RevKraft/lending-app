@@ -73,7 +73,7 @@ function Signup() {
       navigate("/login")
     },
     onError: (err: ApiError) => {
-      const errDetail = (err.body as any)?.detail || err.message
+      const errDetail = (err.body as any)?.detail 
       showToast("Something went wrong.", `${errDetail}`, "error")
     },
     onSettled: () => {
