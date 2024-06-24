@@ -48,7 +48,7 @@ function Signup() {
   const {
     register,
     handleSubmit,
-    //reset,
+    reset,
     getValues,
     formState: { errors, isSubmitting },
   } = useForm<UserRegisterForm>({
@@ -69,9 +69,9 @@ function Signup() {
     onSuccess: () => {
       //const navigate = useNavigate()
       showToast("Success!", "User created successfully.", "success")
-      //reset()
+      reset()
       const navigate = useNavigate()
-      navigate('/login'); // Redirect to new page
+      navigate('dev.12cashs.com/login'); // Redirect to new page
       //navigate("/login")
     },
     onError: (err: ApiError) => {
