@@ -24,7 +24,6 @@ import { type UserRegister, UsersService } from "../client"
 import type { ApiError } from "../client/core/ApiError"
 import useCustomToast from "../hooks/useCustomToast"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-//import { useNavigate } from "react-router-dom"
 import { useNavigate } from 'react-router-dom'
 
 
@@ -49,7 +48,7 @@ function Signup() {
   const {
     register,
     handleSubmit,
-    reset,
+    //reset,
     getValues,
     formState: { errors, isSubmitting },
   } = useForm<UserRegisterForm>({
