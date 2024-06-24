@@ -70,7 +70,7 @@ function Signup() {
     onSuccess: () => {
       //const navigate = useNavigate()
       showToast("Success!", "User created successfully.", "success")
-      reset()
+      //reset()
       const navigate = useNavigate()
       navigate('/login'); // Redirect to new page
       //navigate("/login")
