@@ -46,7 +46,6 @@ export const Route = createFileRoute("/signup")({
 function Signup() {
   const queryClient = useQueryClient()
   const showToast = useCustomToast()
-  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -72,6 +71,7 @@ function Signup() {
       //const navigate = useNavigate()
       showToast("Success!", "User created successfully.", "success")
       reset()
+      const navigate = useNavigate()
       navigate('/login'); // Redirect to new page
       //navigate("/login")
     },
