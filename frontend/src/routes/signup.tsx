@@ -24,7 +24,7 @@ import { type UserRegister, UsersService } from "../client"
 import type { ApiError } from "../client/core/ApiError"
 import useCustomToast from "../hooks/useCustomToast"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-//import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 interface UserRegisterForm extends UserRegister {
@@ -45,6 +45,7 @@ export const Route = createFileRoute("/signup")({
 function Signup() {
   const queryClient = useQueryClient()
   const showToast = useCustomToast()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -67,11 +68,9 @@ function Signup() {
     mutationFn: (data: UserRegister) =>
       UsersService.registerUser({ requestBody: data }),
     onSuccess: () => {
-      //const navigate = useNavigate()
       showToast("Success!", "User created successfully.", "success")
       reset()
-      //navigate('dev.12cashs.com/login'); // Redirect to new page
-      //navigate("/login")
+      navigate("/login")
     },
     onError: (err: ApiError) => {
       const errDetail = (err.body as any)?.detail
