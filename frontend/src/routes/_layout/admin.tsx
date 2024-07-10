@@ -69,7 +69,7 @@ const MembersTableBody = () => {
                 bg={user.is_onboarded ? "ui.success" : "ui.danger"}
                 alignSelf="center"
               />
-              {user.is_onboarded ? "Onboarded" : "Not onboarded"}
+              {user.is_onboarded ? "Onboarded" : "Not Onboarded"}
             </Flex>
           </Td>
           <Td>
