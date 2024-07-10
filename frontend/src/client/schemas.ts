@@ -288,6 +288,10 @@ export const $UserCreate = {
       type: "boolean",
       default: true,
     },
+    is_onboarded: {
+      type: "boolean",
+      default: false,
+    },
     is_superuser: {
       type: "boolean",
       default: false,
@@ -319,6 +323,10 @@ export const $UserPublic = {
     is_active: {
       type: "boolean",
       default: true,
+    },
+    is_onboarded: {
+      type: "boolean",
+      default: false,
     },
     is_superuser: {
       type: "boolean",
@@ -382,6 +390,10 @@ export const $UserUpdate = {
     is_active: {
       type: "boolean",
       default: true,
+    },
+    is_onboarded: {
+      type: "boolean",
+      default: false,
     },
     is_superuser: {
       type: "boolean",
