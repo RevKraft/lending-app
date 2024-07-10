@@ -158,6 +158,11 @@ const EditUser = ({ user, isOpen, onClose }: EditUserProps) => {
                   Is active?
                 </Checkbox>
               </FormControl>
+              <FormControl mt={4}>
+                <Checkbox {...register("is_onboarded")} colorScheme="teal">
+                  Is active?
+                </Checkbox>
+              </FormControl>
             </Flex>
           </ModalBody>
 

@@ -61,6 +61,18 @@ const MembersTableBody = () => {
             </Flex>
           </Td>
           <Td>
+            <Flex gap={2}>
+              <Box
+                w="2"
+                h="2"
+                borderRadius="50%"
+                bg={user.is_onboarded ? "ui.success" : "ui.danger"}
+                alignSelf="center"
+              />
+              {user.is_onboarded ? "Onboarded" : "Not onboarded"}
+            </Flex>
+          </Td>
+          <Td>
             <ActionsMenu
               type="User"
               value={user}
