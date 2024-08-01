@@ -1,13 +1,10 @@
 from typing import Any, Dict
 
-from fastapi import APIRouter, Depends, HTTPException, Request
-from sqlmodel import col, delete, func, select
+from fastapi import APIRouter, Request
 
 from app.models import (
     RequestBodyModel,
 )
-from app.utils import generate_new_account_email, send_email
-
 
 router = APIRouter()
 
