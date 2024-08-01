@@ -67,6 +67,7 @@ class ItemBase(SQLModel):
     regulatoryRegion: str = Field(min_length=1, max_length=255)
     description: str | None = Field(default=None, max_length=255)
 
+
 class TransactionBase(SQLModel):
     title: str = Field(min_length=1, max_length=255)
     beneficiaryId: str = Field(min_length=1, max_length=255)
@@ -76,6 +77,7 @@ class TransactionBase(SQLModel):
     payment_id: str | None = Field(default=None, max_length=255)
     system_reference_number: str | None = Field(default=None, max_length=255)
     description: str | None = Field(default=None, max_length=255)
+
 
 class BeneficiaryBase(SQLModel):
     title: str = Field(min_length=1, max_length=255)
@@ -91,6 +93,7 @@ class BeneficiaryBase(SQLModel):
     beneficiaryHashId: str | None = Field(default=None, max_length=255)
     description: str | None = Field(default=None, max_length=255)
 
+
 # Properties to receive on item/transaction/beneficiary creation
 class ItemCreate(ItemBase):
     title: str = Field(min_length=1, max_length=255)
@@ -98,11 +101,13 @@ class ItemCreate(ItemBase):
     status: str = Field(min_length=1, max_length=255)
     regulatoryRegion: str = Field(min_length=1, max_length=255)
 
+
 class TransactionCreate(TransactionBase):
     title: str = Field(min_length=1, max_length=255)
     beneficiaryId: str = Field(min_length=1, max_length=255)
     payout_source_amount: str = Field(min_length=1, max_length=255)
     payout_source_currency: str = Field(min_length=1, max_length=255)
+
 
 class BeneficiaryCreate(BeneficiaryBase):
     title: str = Field(min_length=1, max_length=255)
@@ -122,8 +127,10 @@ class BeneficiaryCreate(BeneficiaryBase):
 class ItemUpdate(ItemBase):
     title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
 
+
 class TransactionUpdate(TransactionBase):
     title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
+
 
 class BeneficiaryUpdate(BeneficiaryBase):
     title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
@@ -138,6 +145,7 @@ class BeneficiaryUpdate(BeneficiaryBase):
     routingCodeValue1: str = Field(min_length=1, max_length=255)
     beneficiaryHashId: str | None = Field(default=None, min_length=1, max_length=255)
 
+
 # Database model, database table inferred from class name
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -147,6 +155,7 @@ class Item(ItemBase, table=True):
     regulatoryRegion: str = Field(max_length=255)
     owner_id: int | None = Field(default=None, foreign_key="user.id", nullable=False)
     owner: User | None = Relationship(back_populates="items")
+
 
 class Transaction(TransactionBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -159,6 +168,7 @@ class Transaction(TransactionBase, table=True):
     system_reference_number: str | None = Field(default=None, max_length=255)
     owner_id: int | None = Field(default=None, foreign_key="user.id", nullable=False)
     owner: User | None = Relationship(back_populates="transactions")
+
 
 class Beneficiary(BeneficiaryBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -181,25 +191,31 @@ class ItemPublic(ItemBase):
     id: int
     owner_id: int
 
+
 class TransactionPublic(TransactionBase):
     id: int
     owner_id: int
+
 
 class BeneficiaryPublic(BeneficiaryBase):
     id: int
     owner_id: int
 
+
 class ItemsPublic(SQLModel):
     data: list[ItemPublic]
     count: int
+
 
 class TransactionsPublic(SQLModel):
     data: list[TransactionPublic]
     count: int
 
+
 class BeneficiariesPublic(SQLModel):
     data: list[BeneficiaryPublic]
     count: int
+
 
 # Generic message
 class Message(SQLModel):
@@ -220,6 +236,7 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=40)
+
 
 # Generic request
 class RequestBodyModel(RootModel[dict[str, Any]]):
