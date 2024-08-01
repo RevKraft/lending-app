@@ -1,19 +1,18 @@
-import logging
+from typing import Any, Dict
 
-import sentry_sdk
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
+import logging
+import sentry_sdk
 from starlette.middleware.cors import CORSMiddleware
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-from typing import Any, Dict
 
 from app.api.main import api_router
 from app.core.config import settings
 from app.models import UserCreate, UserRegister
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def custom_generate_unique_id(route: APIRoute) -> str:
     return f"{route.tags[0]}-{route.name}"
@@ -49,6 +48,5 @@ def new_register(body: UserRegister) -> Dict[str, Any]:
 def new_user(body: UserCreate) -> Dict[str, Any]:
     logger.info(body)
     return {"body": body, "message": "Automatic webhook processed"}
-
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
