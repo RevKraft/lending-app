@@ -40,14 +40,16 @@ if settings.BACKEND_CORS_ORIGINS:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
 @app.webhooks.post("new-register")
-def new_register(body: UserRegister):
+def new_register(body: UserRegister) -> dict:
     print(body)
-    return {"body": body, "message": "Automatic weebhhok processed"}
+    return {"body": body, "message": "Automatic webhook processed"}
 
 @app.webhooks.post("new-user")
-def new_user(body: UserCreate):
+def new_user(body: UserCreate) -> dict:
     logger.info(body)
-    return {"body": body, "message": "Automatic weebhhok processed"}
+    return {"body": body, "message": "Automatic webhook processed"}
+
 
 app.include_router(api_router, prefix=settings.API_V1_STR)
