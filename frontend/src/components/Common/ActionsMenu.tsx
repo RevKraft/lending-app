@@ -9,14 +9,16 @@ import {
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { FiEdit, FiTrash } from "react-icons/fi"
 
-import type { ItemPublic, UserPublic } from "../../client"
+import type { BeneficiaryPublic, ItemPublic, TransactionPublic, UserPublic } from "../../client"
 import EditUser from "../Admin/EditUser"
 import EditItem from "../Items/EditItem"
+import EditTransaction from "../Transactions/EditTransaction"
+import EditBeneficiary from "../Beneficiaries/EditBeneficiary"
 import Delete from "./DeleteAlert"
 
 interface ActionsMenuProps {
   type: string
-  value: ItemPublic | UserPublic
+  value: ItemPublic | UserPublic | TransactionPublic | BeneficiaryPublic
   disabled?: boolean
 }
 
@@ -54,13 +56,25 @@ const ActionsMenu = ({ type, value, disabled }: ActionsMenuProps) => {
             isOpen={editUserModal.isOpen}
             onClose={editUserModal.onClose}
           />
-        ) : (
+        ) : type === "Item" ? (
           <EditItem
             item={value as ItemPublic}
             isOpen={editUserModal.isOpen}
             onClose={editUserModal.onClose}
           />
-        )}
+        ) : type === "Beneficiary" ? (
+          <EditBeneficiary
+            beneficiary={value as BeneficiaryPublic}
+            isOpen={editUserModal.isOpen}
+            onClose={editUserModal.onClose}
+          />
+        ) : type === "Transaction" ? (
+          <EditTransaction
+            transaction={value as TransactionPublic}
+            isOpen={editUserModal.isOpen}
+            onClose={editUserModal.onClose}
+          />
+        ) : null}
         <Delete
           type={type}
           id={value.id}

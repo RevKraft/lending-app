@@ -11,8 +11,10 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  CSSReset,
 } from "@chakra-ui/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Global } from "@emotion/react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
 import { type ApiError, type TransactionCreate, TransactionsService } from "../../client"
@@ -64,6 +66,14 @@ const AddTransaction = ({ isOpen, onClose }: AddTransactionProps) => {
 
   return (
     <>
+      <CSSReset />
+      <Global
+        styles={`
+          * {
+            font-family: 'Roboto', sans-serif;
+          }
+        `}
+      />
       <Modal
         isOpen={isOpen}
         onClose={onClose}
@@ -88,6 +98,75 @@ const AddTransaction = ({ isOpen, onClose }: AddTransactionProps) => {
               {errors.title && (
                 <FormErrorMessage>{errors.title.message}</FormErrorMessage>
               )}
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors.beneficiaryId}>
+              <FormLabel htmlFor="beneficiaryId">Beneficiary Id</FormLabel>
+              <Input
+                id="beneficiaryId"
+                {...register("beneficiaryId", {
+                  required: "Beneficiary Id is required.",
+                })}
+                placeholder="660ee40ff9fcab54bcdec4fa"
+                type="text"
+              />
+              {errors.beneficiaryId && (
+                <FormErrorMessage>{errors.beneficiaryId.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors.payout_source_amount}>
+              <FormLabel htmlFor="payout_source_amount">Payout Source Amount</FormLabel>
+              <Input
+                id="payout_source_amount"
+                {...register("payout_source_amount", {
+                  required: "Payout Source Amount is required.",
+                })}
+                placeholder="500"
+                type="text"
+              />
+              {errors.payout_source_amount && (
+                <FormErrorMessage>{errors.payout_source_amount.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors.payout_source_currency}>
+              <FormLabel htmlFor="payout_source_currency">Payout Source Currency</FormLabel>
+              <Input
+                id="payout_source_currency"
+                {...register("payout_source_currency", {
+                  required: "Payout Source Currency is required.",
+                })}
+                placeholder="USD"
+                type="text"
+              />
+              {errors.payout_source_currency && (
+                <FormErrorMessage>{errors.payout_source_currency.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel htmlFor="message">Message</FormLabel>
+              <Input
+                id="message"
+                {...register("message")}
+                placeholder="Transfer Initiated"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel htmlFor="payment_id">Payment Id</FormLabel>
+              <Input
+                id="payment_id"
+                {...register("payment_id")}
+                placeholder="12345"
+                type="text"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel htmlFor="system_reference_number">System Reference Number</FormLabel>
+              <Input
+                id="system_reference_number"
+                {...register("system_reference_number")}
+                placeholder="RT0710486913"
+                type="text"
+              />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel htmlFor="description">Description</FormLabel>

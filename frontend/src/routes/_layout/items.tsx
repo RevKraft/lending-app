@@ -12,10 +12,11 @@ import {
   Th,
   Thead,
   Tr,
+  Tooltip,
 } from "@chakra-ui/react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-
+import { useTranslation } from 'react-i18next'
 import { useEffect } from "react"
 import { ItemsService } from "../../client"
 import ActionsMenu from "../../components/Common/ActionsMenu"
@@ -24,6 +25,10 @@ import Navbar from "../../components/Common/Navbar"
 const itemsSearchSchema = z.object({
   page: z.number().catch(1),
 })
+
+interface ItemsSearchParams {
+  page?: number
+}
 
 export const Route = createFileRoute("/_layout/items")({
   component: Items,
@@ -41,11 +46,12 @@ function getItemsQueryOptions({ page }: { page: number }) {
 }
 
 function ItemsTable() {
+  const { t } = useTranslation()
   const queryClient = useQueryClient()
   const { page } = Route.useSearch()
   const navigate = useNavigate({ from: Route.fullPath })
   const setPage = (page: number) =>
-    navigate({ search: (prev) => ({ ...prev, page }) })
+    navigate({ search: (prev: ItemsSearchParams) => ({ ...prev, page }) })
 
   const {
     data: items,
@@ -71,10 +77,41 @@ function ItemsTable() {
         <Table size={{ base: "sm", md: "md" }}>
           <Thead>
             <Tr>
-              <Th>ID</Th>
-              <Th>Title</Th>
-              <Th>Description</Th>
-              <Th>Actions</Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.id')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.id')}</div>
+                </Tooltip>
+              </Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.title')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.title')}</div>
+                </Tooltip>
+              </Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.walletHashId')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.walletHashId')}</div>
+                </Tooltip>
+              </Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.status')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.status')}</div>
+                </Tooltip>
+              </Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.regulatoryRegion')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.regulatoryRegion')}</div>
+                </Tooltip>
+              </Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.description')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.description')}</div>
+                </Tooltip>
+              </Th>
+              <Th>
+                <Tooltip label={t('items.tooltips.actions')}>
+                  <div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('items.table.actions')}</div>
+                </Tooltip>
+              </Th>
             </Tr>
           </Thead>
           {isPending ? (
@@ -97,6 +134,9 @@ function ItemsTable() {
                 <Tr key={item.id} opacity={isPlaceholderData ? 0.5 : 1}>
                   <Td>{item.id}</Td>
                   <Td>{item.title}</Td>
+                  <Td>{item.walletHashId}</Td>
+                  <Td>{item.status}</Td>
+                  <Td>{item.regulatoryRegion}</Td>
                   <Td color={!item.description ? "ui.dim" : "inherit"}>
                     {item.description || "N/A"}
                   </Td>
@@ -115,13 +155,19 @@ function ItemsTable() {
         mt={4}
         direction="row"
         justifyContent="flex-end"
+        position="fixed"
+        bottom={4}
+        right={4}
+        p={4}
+        backgroundColor="white"
+        boxShadow="0 -2px 10px rgba(0, 0, 0, 0.1)"
       >
         <Button onClick={() => setPage(page - 1)} isDisabled={!hasPreviousPage}>
-          Previous
+          {t('common.previous')}
         </Button>
-        <span>Page {page}</span>
+        <span>{t('common.page')} {page}</span>
         <Button isDisabled={!hasNextPage} onClick={() => setPage(page + 1)}>
-          Next
+          {t('common.next')}
         </Button>
       </Flex>
     </>
@@ -129,12 +175,12 @@ function ItemsTable() {
 }
 
 function Items() {
+  const { t } = useTranslation()
   return (
     <Container maxW="full">
       <Heading size="lg" textAlign={{ base: "center", md: "left" }} pt={12}>
-        Items Management
+      {t('items.title')}
       </Heading>
-
       <Navbar type={"Item"} />
       <ItemsTable />
     </Container>

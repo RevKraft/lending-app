@@ -2,7 +2,7 @@ import type { CancelablePromise } from "./core/CancelablePromise"
 import { OpenAPI } from "./core/OpenAPI"
 import { request as __request } from "./core/request"
 
-import type { Body_login_login_access_token,Message,NewPassword,Token,UserPublic,UpdatePassword,UserCreate,UserRegister,UsersPublic,UserUpdate,UserUpdateMe,ItemCreate,ItemPublic,ItemsPublic,ItemUpdate,TransactionCreate,TransactionPublic,TransactionsPublic,TransactionUpdate} from './models';
+import type { Body_login_login_access_token,Message,NewPassword,Token,UserPublic,UpdatePassword,UserCreate,UserRegister,UsersPublic,UserUpdate,UserUpdateMe,ItemCreate,ItemPublic,ItemsPublic,ItemUpdate,TransactionCreate,TransactionPublic,TransactionsPublic,TransactionUpdate,BeneficiaryCreate,BeneficiaryPublic,BeneficiariesPublic, BeneficiaryUpdate} from './models';
 
 export type TDataLoginAccessToken = {
   formData: Body_login_login_access_token
@@ -502,7 +502,7 @@ export class ItemsService {
 
 export type TDataReadTransactions = {
 	limit?: number
-skip?: number
+  skip?: number
 	
 }
 export type TDataCreateTransaction = {
@@ -510,17 +510,16 @@ export type TDataCreateTransaction = {
 	
 }
 export type TDataReadTransaction = {
-	id: number
-	
+	id: number	
 }
+
 export type TDataUpdateTransaction = {
 	id: number
-requestBody: TransactionUpdate
-	
+  requestBody: TransactionUpdate
 }
+
 export type TDataDeleteTransaction = {
 	id: number
-	
 }
 
 export class TransactionsService {
@@ -532,10 +531,7 @@ export class TransactionsService {
 	 * @throws ApiError
 	 */
 	public static readTransactions(data: TDataReadTransactions = {}): CancelablePromise<TransactionsPublic> {
-		const {
-limit = 100,
-skip = 0,
-} = data;
+		const { limit = 100, skip = 0 } = data;
 		return __request(OpenAPI, {
 			method: 'GET',
 			url: '/api/v1/transactions/',
@@ -554,10 +550,10 @@ skip = 0,
 	 * @returns TransactionPublic Successful Response
 	 * @throws ApiError
 	 */
-	public static createTransaction(data: TDataCreateTransaction): CancelablePromise<TransactionPublic> {
-		const {
-requestBody,
-} = data;
+	public static createTransaction(
+    data: TDataCreateTransaction,
+  ): CancelablePromise<TransactionPublic> {
+		const { requestBody } = data;
 		return __request(OpenAPI, {
 			method: 'POST',
 			url: '/api/v1/transactions/',
@@ -568,7 +564,7 @@ requestBody,
 			},
 		});
 	}
-
+ 
 	/**
 	 * Read Transaction
 	 * Get transaction by ID.
@@ -576,9 +572,7 @@ requestBody,
 	 * @throws ApiError
 	 */
 	public static readTransaction(data: TDataReadTransaction): CancelablePromise<TransactionPublic> {
-		const {
-id,
-} = data;
+		const { id } = data;
 		return __request(OpenAPI, {
 			method: 'GET',
 			url: '/api/v1/transactions/{id}',
@@ -590,4 +584,181 @@ id,
 			},
 		});
 	}
+
+
+  /**
+   * Update Transaction
+   * Update a transaction.
+   * @returns TransactionPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateTransaction(
+    data: TDataUpdateTransaction,
+  ): CancelablePromise<TransactionPublic> {
+    const { id, requestBody } = data
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/transactions/{id}",
+      path: {
+        id,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Delete Transaction
+   * Delete a transaction.
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteTransaction(data: TDataDeleteTransaction): CancelablePromise<Message> {
+    const { id } = data
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/transactions/{id}",
+      path: {
+        id,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+  
+}
+
+export type TDataReadBeneficiaries = {
+	limit?: number
+  skip?: number
+}
+
+export type TDataCreateBeneficiary = {
+	requestBody: BeneficiaryCreate
+}
+
+export type TDataReadBeneficiary = {
+	id: number
+}
+
+export type TDataUpdateBeneficiary = {
+	id: number
+  requestBody: BeneficiaryUpdate
+}
+
+export type TDataDeleteBeneficiary = {
+	id: number
+}
+
+export class BeneficiariesService {
+
+	/**
+	 * Read Beneficiaries
+	 * Retrieve beneficiaries.
+	 * @returns BeneficiariesPublic Successful Response
+	 * @throws ApiError
+	 */
+	public static readBeneficiaries(data: TDataReadBeneficiaries = {}): CancelablePromise<BeneficiariesPublic> {
+		const { limit = 100, skip = 0,} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/v1/beneficiaries/',
+			query: {
+				skip, limit
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * Create Beneficiary
+	 * Create new beneficiary.
+	 * @returns BeneficiaryPublic Successful Response
+	 * @throws ApiError
+	 */
+	public static createBeneficiary(
+    data: TDataCreateBeneficiary,
+  ): CancelablePromise<BeneficiaryPublic> {
+		const { requestBody } = data;
+		return __request(OpenAPI, {
+			method: 'POST',
+			url: '/api/v1/beneficiaries/',
+			body: requestBody,
+			mediaType: 'application/json',
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * Read Beneficiary
+	 * Get beneficiary by ID.
+	 * @returns BeneficiaryPublic Successful Response
+	 * @throws ApiError
+	 */
+	public static readBeneficiary(data: TDataReadBeneficiary): CancelablePromise<BeneficiaryPublic> {
+		const { id } = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/v1/beneficiaries/{id}',
+			path: {
+				id
+			},
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+
+  /**
+   * Update Beneficiary
+   * Update a beneficiary.
+   * @returns BeneficiaryPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateBeneficiary(
+    data: TDataUpdateBeneficiary,
+  ): CancelablePromise<BeneficiaryPublic> {
+    const { id, requestBody } = data
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/beneficiaries/{id}",
+      path: {
+        id,
+      },
+      body: requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
+
+  /**
+   * Delete Beneficiary
+   * Delete a beneficiary.
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteBeneficiary(data: TDataDeleteBeneficiary): CancelablePromise<Message> {
+    const { id } = data
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/beneficiaries/{id}",
+      path: {
+        id,
+      },
+      errors: {
+        422: `Validation Error`,
+      },
+    })
+  }
 }

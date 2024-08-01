@@ -66,6 +66,18 @@ export const $ItemCreate = {
       type: "string",
       isRequired: true,
     },
+    walletHashId: {
+      type: "string",
+      isRequired: true,
+    },
+    status: {
+      type: "string",
+      isRequired: true,
+    },
+    regulatoryRegion: {
+      type: "string",
+      isRequired: true,
+    },
     description: {
       type: "any-of",
       contains: [
@@ -83,6 +95,18 @@ export const $ItemCreate = {
 export const $ItemPublic = {
   properties: {
     title: {
+      type: "string",
+      isRequired: true,
+    },
+    walletHashId: {
+      type: "string",
+      isRequired: true,
+    },
+    status: {
+      type: "string",
+      isRequired: true,
+    },
+    regulatoryRegion: {
       type: "string",
       isRequired: true,
     },
@@ -157,6 +181,42 @@ export const $TransactionCreate = {
 	type: 'string',
 	isRequired: true,
 },
+    beneficiaryId: {
+	type: 'string',
+	isRequired: true,
+},
+    payout_source_amount: {
+	type: 'string',
+	isRequired: true,
+},
+    payout_source_currency: {
+	type: 'string',
+	isRequired: true,
+},
+    message: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+    payment_id: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+    system_reference_number: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
 		description: {
 	type: 'any-of',
 	contains: [{
@@ -166,13 +226,49 @@ export const $TransactionCreate = {
 }],
 },
 	},
-} as const;
+} as const
 
 export const $TransactionPublic = {
 	properties: {
 		title: {
 	type: 'string',
 	isRequired: true,
+},
+    beneficiaryId: {
+	type: 'string',
+	isRequired: true,
+},
+    payout_source_amount: {
+	type: 'string',
+	isRequired: true,
+},
+    payout_source_currency: {
+	type: 'string',
+	isRequired: true,
+},
+    message: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+    payment_id: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+    system_reference_number: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
 },
 		description: {
 	type: 'any-of',
@@ -191,7 +287,7 @@ export const $TransactionPublic = {
 	isRequired: true,
 },
 	},
-} as const;
+} as const
 
 export const $TransactionUpdate = {
 	properties: {
@@ -212,7 +308,7 @@ export const $TransactionUpdate = {
 }],
 },
 	},
-} as const;
+} as const
 
 export const $TransactionsPublic = {
 	properties: {
@@ -220,6 +316,165 @@ export const $TransactionsPublic = {
 	type: 'array',
 	contains: {
 		type: 'TransactionPublic',
+	},
+	isRequired: true,
+},
+		count: {
+	type: 'number',
+	isRequired: true,
+},
+	},
+} as const
+
+export const $BeneficiaryCreate = {
+	properties: {
+		title: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryName: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryAccountType: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryCountryCode: {
+	type: 'string',
+	isRequired: true,
+},
+    destinationCountry: {
+	type: 'string',
+	isRequired: true,
+},
+    destinationCurrency: {
+	type: 'string',
+	isRequired: true,
+},
+    payoutMethod: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryAccountNumber: {
+	type: 'string',
+	isRequired: true,
+},
+    routingCodeType1: {
+	type: 'string',
+	isRequired: true,
+},
+    routingCodeValue1: {
+	type: 'string',
+	isRequired: true,
+},
+		description: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+	},
+} as const;
+
+export const $BeneficiaryPublic = {
+	properties: {
+		title: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryName: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryAccountType: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryCountryCode: {
+	type: 'string',
+	isRequired: true,
+},
+    destinationCountry: {
+	type: 'string',
+	isRequired: true,
+},
+    destinationCurrency: {
+	type: 'string',
+	isRequired: true,
+},
+    payoutMethod: {
+	type: 'string',
+	isRequired: true,
+},
+    beneficiaryAccountNumber: {
+	type: 'string',
+	isRequired: true,
+},
+    routingCodeType1: {
+	type: 'string',
+	isRequired: true,
+},
+    routingCodeValue1: {
+	type: 'string',
+	isRequired: true,
+},
+  beneficiaryHashId: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+		description: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+		id: {
+	type: 'number',
+	isRequired: true,
+},
+		owner_id: {
+	type: 'number',
+	isRequired: true,
+},
+	},
+} as const;
+
+export const $BeneficiaryUpdate = {
+	properties: {
+		title: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+		description: {
+	type: 'any-of',
+	contains: [{
+	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+	},
+} as const;
+
+export const $BeneficiariesPublic = {
+	properties: {
+		data: {
+	type: 'array',
+	contains: {
+		type: 'BeneficiaryPublic',
 	},
 	isRequired: true,
 },

@@ -1,6 +1,6 @@
 import { Box, Container, Text } from "@chakra-ui/react"
 import { createFileRoute } from "@tanstack/react-router"
-
+import { useTranslation } from 'react-i18next'
 import useAuth from "../../hooks/useAuth"
 
 export const Route = createFileRoute("/_layout/")({
@@ -8,6 +8,7 @@ export const Route = createFileRoute("/_layout/")({
 })
 
 function Dashboard() {
+  const { t } = useTranslation()
   const { user: currentUser } = useAuth()
 
   return (
@@ -15,9 +16,9 @@ function Dashboard() {
       <Container maxW="full">
         <Box pt={12} m={4}>
           <Text fontSize="2xl">
-            Hi, {currentUser?.full_name || currentUser?.email} 👋🏼
+          {t('index.hi')} {currentUser?.full_name || currentUser?.email} 👋🏼
           </Text>
-          <Text>Welcome back, nice to see you again!</Text>
+          <Text>{t('index.greetings')}</Text>
         </Box>
       </Container>
     </>

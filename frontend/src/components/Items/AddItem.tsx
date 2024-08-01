@@ -11,8 +11,10 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  CSSReset,
 } from "@chakra-ui/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Global } from "@emotion/react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
 import { type ApiError, type ItemCreate, ItemsService } from "../../client"
@@ -63,6 +65,14 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
 
   return (
     <>
+      <CSSReset />
+      <Global
+        styles={`
+          * {
+            font-family: 'Roboto', sans-serif;
+          }
+        `}
+      />
       <Modal
         isOpen={isOpen}
         onClose={onClose}
@@ -86,6 +96,48 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
               />
               {errors.title && (
                 <FormErrorMessage>{errors.title.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors.walletHashId}>
+              <FormLabel htmlFor="walletHashId">Wallet Hash Id</FormLabel>
+              <Input
+                id="walletHashId"
+                {...register("walletHashId", {
+                  required: "Wallet Hash Id is required.",
+                })}
+                placeholder="1e2d2de7-7c95-4c04-b7a7-7e14784ddd52"
+                type="text"
+              />
+              {errors.walletHashId && (
+                <FormErrorMessage>{errors.walletHashId.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors.status}>
+              <FormLabel htmlFor="status">Status</FormLabel>
+              <Input
+                id="status"
+                {...register("status", {
+                  required: "Status is required.",
+                })}
+                placeholder="Pending"
+                type="text"
+              />
+              {errors.status && (
+                <FormErrorMessage>{errors.status.message}</FormErrorMessage>
+              )}
+            </FormControl>
+            <FormControl isRequired isInvalid={!!errors.regulatoryRegion}>
+              <FormLabel htmlFor="regulatoryRegion">Regulatory Region</FormLabel>
+              <Input
+                id="regulatoryRegion"
+                {...register("regulatoryRegion", {
+                  required: "Regulatory Region is required.",
+                })}
+                placeholder="US"
+                type="text"
+              />
+              {errors.regulatoryRegion && (
+                <FormErrorMessage>{errors.regulatoryRegion.message}</FormErrorMessage>
               )}
             </FormControl>
             <FormControl mt={4}>

@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react"
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query"
 import { createFileRoute } from "@tanstack/react-router"
-
+import { useTranslation } from 'react-i18next'
 import { Suspense } from "react"
 import { type UserPublic, UsersService } from "../../client"
 import ActionsMenu from "../../components/Common/ActionsMenu"
@@ -49,27 +49,27 @@ const MembersTableBody = () => {
           <Td>{user.email}</Td>
           <Td>{user.is_superuser ? "Superuser" : "User"}</Td>
           <Td>
-            <Flex gap={2}>
-              <Box
-                w="2"
-                h="2"
-                borderRadius="50%"
-                bg={user.is_active ? "ui.success" : "ui.danger"}
-                alignSelf="center"
-              />
-              {user.is_active ? "Active" : "Inactive"}
-            </Flex>
-          </Td>
-          <Td>
-            <Flex gap={2}>
-              <Box
-                w="2"
-                h="2"
-                borderRadius="50%"
-                bg={user.is_onboarded ? "ui.success" : "ui.danger"}
-                alignSelf="center"
-              />
-              {user.is_onboarded ? "Onboarded" : "Not Onboarded"}
+            <Flex direction="column" gap={2}>
+              <Flex gap={2}>
+                <Box
+                  w="2"
+                  h="2"
+                  borderRadius="50%"
+                  bg={user.is_active ? "ui.success" : "ui.danger"}
+                  alignSelf="center"
+                />
+                {user.is_active ? "Active" : "Inactive"}
+              </Flex>
+              <Flex gap={2}>
+                <Box
+                  w="2"
+                  h="2"
+                  borderRadius="50%"
+                  bg={user.is_onboarded ? "ui.success" : "ui.danger"}
+                  alignSelf="center"
+                />
+                {user.is_onboarded ? "Onboarded" : "Not Onboarded"}
+              </Flex>
             </Flex>
           </Td>
           <Td>
@@ -100,21 +100,22 @@ const MembersBodySkeleton = () => {
 }
 
 function Admin() {
+  const { t } = useTranslation()
   return (
     <Container maxW="full">
       <Heading size="lg" textAlign={{ base: "center", md: "left" }} pt={12}>
-        User Management
+        {t('admin.title')}
       </Heading>
       <Navbar type={"User"} />
       <TableContainer>
         <Table fontSize="md" size={{ base: "sm", md: "md" }}>
           <Thead>
             <Tr>
-              <Th width="20%">Full name</Th>
-              <Th width="50%">Email</Th>
-              <Th width="10%">Role</Th>
-              <Th width="10%">Status</Th>
-              <Th width="10%">Actions</Th>
+              <Th width="20%"><div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('admin.table.fullName')}</div></Th>
+              <Th width="50%"><div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('admin.table.email')}</div></Th>
+              <Th width="10%"><div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('admin.table.role')}</div></Th>
+              <Th width="10%"><div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('admin.table.status')}</div></Th>
+              <Th width="10%"><div style={{ whiteSpace: 'normal', wordWrap: 'break-word', textAlign: 'center', hyphens: 'auto', textTransform: 'none'}}>{t('admin.table.actions')}</div></Th>
             </Tr>
           </Thead>
           <Suspense fallback={<MembersBodySkeleton />}>

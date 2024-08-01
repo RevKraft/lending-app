@@ -23,8 +23,9 @@ from app.models import (
     UserUpdate,
     UserUpdateMe,
     Transaction,
+    Beneficiary,
 )
-from app.utils import generate_new_account_email, send_email
+from app.utils import generate_new_account_email, send_email, new_user
 
 router = APIRouter()
 
@@ -71,6 +72,9 @@ def create_user(*, session: SessionDep, user_in: UserCreate) -> Any:
             email_to=user_in.email,
             subject=email_data.subject,
             html_content=email_data.html_content,
+        )
+        new_user(
+            body=UserCreate
         )
     return user
 
@@ -137,6 +141,8 @@ def delete_user_me(session: SessionDep, current_user: CurrentUser) -> Any:
     statement = delete(Item).where(col(Item.owner_id) == current_user.id)
     session.exec(statement)  # type: ignore
     statement = delete(Transaction).where(col(Transaction.owner_id) == current_user.id)
+    session.exec(statement)  # type: ignore
+    statement = delete(Beneficiary).where(col(Beneficiary.owner_id) == current_user.id)
     session.exec(statement)  # type: ignore
     session.delete(current_user)
     session.commit()
@@ -231,6 +237,8 @@ def delete_user(
     statement = delete(Item).where(col(Item.owner_id) == user_id)
     session.exec(statement)  # type: ignore
     statement = delete(Transaction).where(col(Transaction.owner_id) == user_id)
+    session.exec(statement)  # type: ignore
+    statement = delete(Beneficiary).where(col(Beneficiary.owner_id) == user_id)
     session.exec(statement)  # type: ignore
     session.delete(user)
     session.commit()

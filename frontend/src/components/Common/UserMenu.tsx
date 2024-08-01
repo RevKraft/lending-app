@@ -9,7 +9,7 @@ import {
 import { Link } from "@tanstack/react-router"
 import { FaUserAstronaut } from "react-icons/fa"
 import { FiLogOut, FiUser } from "react-icons/fi"
-
+import LanguageSelector from "../LanguageSelector/LanguageSelector"
 import useAuth from "../../hooks/useAuth"
 
 const UserMenu = () => {
@@ -48,10 +48,10 @@ const UserMenu = () => {
             >
               Log out
             </MenuItem>
+            <LanguageSelector />
           </MenuList>
         </Menu>
-      </Box>
-    </>
+      </Box>    </>
   )
 }
 

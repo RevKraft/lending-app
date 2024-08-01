@@ -11,6 +11,13 @@ from jwt.exceptions import InvalidTokenError
 
 from app.core.config import settings
 
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+from app.models import (
+    UserCreate,
+)
 
 @dataclass
 class EmailData:
@@ -49,6 +56,10 @@ def send_email(
         smtp_options["password"] = settings.SMTP_PASSWORD
     response = message.send(to=email_to, smtp=smtp_options)
     logging.info(f"send email result: {response}")
+
+def new_user(body: UserCreate):
+    logger.info(body)
+    return {"body": body, "message": "Automatic weebhhok processed"}
 
 
 def generate_test_email(email_to: str) -> EmailData:

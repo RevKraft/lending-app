@@ -3,7 +3,7 @@ from typing import Any
 from sqlmodel import Session, select
 
 from app.core.security import get_password_hash, verify_password
-from app.models import Item, ItemCreate, User, UserCreate, UserUpdate, Transaction, TransactionCreate
+from app.models import Item, ItemCreate, User, UserCreate, UserUpdate, Transaction, TransactionCreate, Beneficiary, BeneficiaryCreate
 
 
 def create_user(*, session: Session, user_create: UserCreate) -> User:
@@ -58,3 +58,10 @@ def create_transaction(*, session: Session, transaction_in: TransactionCreate, o
     session.commit()
     session.refresh(db_transaction)
     return db_transaction
+
+def create_beneficiary(*, session: Session, beneficiary_in: BeneficiaryCreate, owner_id: int) -> Beneficiary:
+    db_beneficiary = Beneficiary.model_validate(beneficiary_in, update={"owner_id": owner_id})
+    session.add(db_beneficiary)
+    session.commit()
+    session.refresh(db_beneficiary)
+    return db_beneficiary

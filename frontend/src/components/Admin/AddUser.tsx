@@ -13,14 +13,18 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  CSSReset,
 } from "@chakra-ui/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Global } from "@emotion/react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
 import { type UserCreate, UsersService } from "../../client"
 import type { ApiError } from "../../client/core/ApiError"
 import useCustomToast from "../../hooks/useCustomToast"
 import { emailPattern } from "../../utils"
+import "@fontsource/roboto" // Import Roboto font
+
 
 interface AddUserProps {
   isOpen: boolean
@@ -76,6 +80,14 @@ const AddUser = ({ isOpen, onClose }: AddUserProps) => {
 
   return (
     <>
+      <CSSReset />
+      <Global
+        styles={`
+          * {
+            font-family: 'Roboto', sans-serif;
+          }
+        `}
+      />
       <Modal
         isOpen={isOpen}
         onClose={onClose}
