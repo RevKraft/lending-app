@@ -12,8 +12,10 @@ from app.api.deps import (
 from app.core.config import settings
 from app.core.security import get_password_hash, verify_password
 from app.models import (
+    Beneficiary,
     Item,
     Message,
+    Transaction,
     UpdatePassword,
     User,
     UserCreate,
@@ -22,10 +24,9 @@ from app.models import (
     UsersPublic,
     UserUpdate,
     UserUpdateMe,
-    Transaction,
-    Beneficiary,
 )
-from app.utils import generate_new_account_email, send_email, new_user
+from app.utils import generate_new_account_email, new_user, send_email
+
 
 router = APIRouter()
 
