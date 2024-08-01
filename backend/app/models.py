@@ -1,6 +1,8 @@
-from pydantic import EmailStr, BaseModel, RootModel
-from sqlmodel import Field, Relationship, SQLModel
 from typing import Any
+
+from pydantic import EmailStr, RootModel
+from sqlmodel import Field, Relationship, SQLModel
+
 
 # Shared properties
 class UserBase(SQLModel):
