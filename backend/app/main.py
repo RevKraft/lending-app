@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 from app.api.main import api_router
 from app.core.config import settings
 
+from typing import Dict, Any
+
 from app.models import (
     UserRegister,
     UserCreate,
@@ -42,12 +44,12 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 @app.webhooks.post("new-register")
-def new_register(body: UserRegister) -> dict:
+def new_register(body: UserRegister) -> Dict[str, Any]:
     print(body)
     return {"body": body, "message": "Automatic webhook processed"}
 
 @app.webhooks.post("new-user")
-def new_user(body: UserCreate) -> dict:
+def new_user(body: UserCreate) -> Dict[str, Any]:
     logger.info(body)
     return {"body": body, "message": "Automatic webhook processed"}
 
