@@ -10,11 +10,10 @@ from app.models import (
     BeneficiaryCreate,
     BeneficiaryPublic,
     BeneficiaryUpdate,
-    Message
+    Message,
 )
 
 router = APIRouter()
-
 
 @router.get("/", response_model=BeneficiariesPublic)
 def read_beneficiaries(
