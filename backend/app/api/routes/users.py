@@ -73,9 +73,7 @@ def create_user(*, session: SessionDep, user_in: UserCreate) -> Any:
             subject=email_data.subject,
             html_content=email_data.html_content,
         )
-        new_user(
-            body=UserCreate
-        )
+        new_user(body=user_in)
     return user
 
 
