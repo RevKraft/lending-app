@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any
 
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
@@ -40,12 +40,12 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 @app.webhooks.post("new-register")
-def new_register(body: UserRegister) -> Dict[str, Any]:
+def new_register(body: UserRegister) -> dict[str, Any]:
     print(body)
     return {"body": body, "message": "Automatic webhook processed"}
 
 @app.webhooks.post("new-user")
-def new_user(body: UserCreate) -> Dict[str, Any]:
+def new_user(body: UserCreate) -> dict[str, Any]:
     logger.info(body)
     return {"body": body, "message": "Automatic webhook processed"}
 

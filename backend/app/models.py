@@ -1,6 +1,6 @@
 from pydantic import EmailStr, BaseModel, RootModel
 from sqlmodel import Field, Relationship, SQLModel
-from typing import Dict, Any
+from typing import Any
 
 # Shared properties
 class UserBase(SQLModel):
@@ -220,5 +220,5 @@ class NewPassword(SQLModel):
     new_password: str = Field(min_length=8, max_length=40)
 
 # Generic request
-class RequestBodyModel(RootModel[Dict[str, Any]]):
+class RequestBodyModel(RootModel[dict[str, Any]]):
     pass

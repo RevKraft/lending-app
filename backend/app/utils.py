@@ -1,25 +1,20 @@
-from typing import Any, Dict
+from typing import Any
 
-import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+import emails  # type: ignore
+from jinja2 import Template
+import jwt
+from jwt.exceptions import InvalidTokenError
+import logging
 from pathlib import Path
 from typing import Any
-import emails  # type: ignore
-import jwt
-from app.core.config import settings
-from jinja2 import Template
-from jwt.exceptions import InvalidTokenError
 
+from app.core.config import settings
 from app.models import UserCreate
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-
-
-
-
 
 @dataclass
 class EmailData:
@@ -59,7 +54,7 @@ def send_email(
     response = message.send(to=email_to, smtp=smtp_options)
     logging.info(f"send email result: {response}")
 
-def new_user(body: UserCreate) -> Dict[str, Any]:
+def new_user(body: UserCreate) -> dict[str, Any]:
     logger.info(body)
     return {"body": body, "message": "Automatic weebhhok processed"}
 
