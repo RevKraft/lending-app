@@ -15,6 +15,8 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+from typing import Dict, Any
+
 from app.models import (
     UserCreate,
 )
@@ -57,7 +59,7 @@ def send_email(
     response = message.send(to=email_to, smtp=smtp_options)
     logging.info(f"send email result: {response}")
 
-def new_user(body: UserCreate):
+def new_user(body: UserCreate) -> Dict[str, Any]:
     logger.info(body)
     return {"body": body, "message": "Automatic weebhhok processed"}
 
