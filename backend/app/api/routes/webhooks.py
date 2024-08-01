@@ -8,6 +8,7 @@ from app.models import (
 
 router = APIRouter()
 
+
 @router.post("/nium", response_model=None)
 async def event_webhook(request: Request, body: RequestBodyModel) -> dict[str, Any]:
     headers = dict(request.headers)

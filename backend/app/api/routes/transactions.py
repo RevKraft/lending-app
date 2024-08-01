@@ -67,7 +67,9 @@ def create_transaction(
     """
     Create new transaction.
     """
-    transaction = Transaction.model_validate(transaction_in, update={"owner_id": current_user.id})
+    transaction = Transaction.model_validate(
+        transaction_in, update={"owner_id": current_user.id}
+    )
     session.add(transaction)
     session.commit()
     session.refresh(transaction)
@@ -76,7 +78,11 @@ def create_transaction(
 
 @router.put("/{id}", response_model=TransactionPublic)
 def update_transaction(
-    *, session: SessionDep, current_user: CurrentUser, id: int, transaction_in: TransactionUpdate
+    *,
+    session: SessionDep,
+    current_user: CurrentUser,
+    id: int,
+    transaction_in: TransactionUpdate,
 ) -> Any:
     """
     Update an transaction.
@@ -95,7 +101,9 @@ def update_transaction(
 
 
 @router.delete("/{id}")
-def delete_transaction(session: SessionDep, current_user: CurrentUser, id: int) -> Message:
+def delete_transaction(
+    session: SessionDep, current_user: CurrentUser, id: int
+) -> Message:
     """
     Delete a transaction.
     """

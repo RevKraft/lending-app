@@ -62,15 +62,25 @@ def create_item(*, session: Session, item_in: ItemCreate, owner_id: int) -> Item
     session.refresh(db_item)
     return db_item
 
-def create_transaction(*, session: Session, transaction_in: TransactionCreate, owner_id: int) -> Transaction:
-    db_transaction = Transaction.model_validate(transaction_in, update={"owner_id": owner_id})
+
+def create_transaction(
+    *, session: Session, transaction_in: TransactionCreate, owner_id: int
+) -> Transaction:
+    db_transaction = Transaction.model_validate(
+        transaction_in, update={"owner_id": owner_id}
+    )
     session.add(db_transaction)
     session.commit()
     session.refresh(db_transaction)
     return db_transaction
 
-def create_beneficiary(*, session: Session, beneficiary_in: BeneficiaryCreate, owner_id: int) -> Beneficiary:
-    db_beneficiary = Beneficiary.model_validate(beneficiary_in, update={"owner_id": owner_id})
+
+def create_beneficiary(
+    *, session: Session, beneficiary_in: BeneficiaryCreate, owner_id: int
+) -> Beneficiary:
+    db_beneficiary = Beneficiary.model_validate(
+        beneficiary_in, update={"owner_id": owner_id}
+    )
     session.add(db_beneficiary)
     session.commit()
     session.refresh(db_beneficiary)

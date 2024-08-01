@@ -15,6 +15,7 @@ from app.models import UserCreate
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 @dataclass
 class EmailData:
     html_content: str
@@ -52,6 +53,7 @@ def send_email(
         smtp_options["password"] = settings.SMTP_PASSWORD
     response = message.send(to=email_to, smtp=smtp_options)
     logging.info(f"send email result: {response}")
+
 
 def new_user(body: UserCreate) -> dict[str, Any]:
     logger.info(body)

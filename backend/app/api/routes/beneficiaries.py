@@ -15,6 +15,7 @@ from app.models import (
 
 router = APIRouter()
 
+
 @router.get("/", response_model=BeneficiariesPublic)
 def read_beneficiaries(
     session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
@@ -66,7 +67,9 @@ def create_beneficiary(
     """
     Create new beneficiary.
     """
-    beneficiary = Beneficiary.model_validate(beneficiary_in, update={"owner_id": current_user.id})
+    beneficiary = Beneficiary.model_validate(
+        beneficiary_in, update={"owner_id": current_user.id}
+    )
     session.add(beneficiary)
     session.commit()
     session.refresh(beneficiary)
@@ -75,7 +78,11 @@ def create_beneficiary(
 
 @router.put("/{id}", response_model=BeneficiaryPublic)
 def update_beneficiary(
-    *, session: SessionDep, current_user: CurrentUser, id: int, beneficiary_in: BeneficiaryUpdate
+    *,
+    session: SessionDep,
+    current_user: CurrentUser,
+    id: int,
+    beneficiary_in: BeneficiaryUpdate,
 ) -> Any:
     """
     Update a beneficiary.
@@ -94,7 +101,9 @@ def update_beneficiary(
 
 
 @router.delete("/{id}")
-def delete_beneficiary(session: SessionDep, current_user: CurrentUser, id: int) -> Message:
+def delete_beneficiary(
+    session: SessionDep, current_user: CurrentUser, id: int
+) -> Message:
     """
     Delete a beneficiary.
     """
