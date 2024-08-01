@@ -1,0 +1,7 @@
+<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Create the arrows with almost black gray color -->
+  <polygon points="50,15 90,50 50,85 60,50" fill="#505050" />
+  <polygon points="150,15 110,50 150,85 140,50" fill="#505050" />
+  <!-- Add the company name -->
+  <text x="50%" y="95" font-family="monospace" font-size="18" fill="gray" text-anchor="middle">RemitFin</text>
+</svg>
