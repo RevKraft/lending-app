@@ -1,6 +1,6 @@
 from pydantic import EmailStr, BaseModel, RootModel
 from sqlmodel import Field, Relationship, SQLModel
-from typing import Dict, Any
+from typing import Any
 
 # Shared properties
 class UserBase(SQLModel):
@@ -74,7 +74,7 @@ class TransactionBase(SQLModel):
     payment_id: str | None = Field(default=None, max_length=255)
     system_reference_number: str | None = Field(default=None, max_length=255)
     description: str | None = Field(default=None, max_length=255)
-    
+
 class BeneficiaryBase(SQLModel):
     title: str = Field(min_length=1, max_length=255)
     beneficiaryName: str = Field(min_length=1, max_length=255)
@@ -101,7 +101,7 @@ class TransactionCreate(TransactionBase):
     beneficiaryId: str = Field(min_length=1, max_length=255)
     payout_source_amount: str = Field(min_length=1, max_length=255)
     payout_source_currency: str = Field(min_length=1, max_length=255)
-    
+
 class BeneficiaryCreate(BeneficiaryBase):
     title: str = Field(min_length=1, max_length=255)
     beneficiaryName: str = Field(min_length=1, max_length=255)
@@ -122,7 +122,7 @@ class ItemUpdate(ItemBase):
 
 class TransactionUpdate(TransactionBase):
     title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
-    
+
 class BeneficiaryUpdate(BeneficiaryBase):
     title: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
     beneficiaryName: str = Field(min_length=1, max_length=255)
@@ -157,7 +157,7 @@ class Transaction(TransactionBase, table=True):
     system_reference_number: str | None = Field(default=None, max_length=255)
     owner_id: int | None = Field(default=None, foreign_key="user.id", nullable=False)
     owner: User | None = Relationship(back_populates="transactions")
-    
+
 class Beneficiary(BeneficiaryBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     title: str = Field(max_length=255)
@@ -220,5 +220,5 @@ class NewPassword(SQLModel):
     new_password: str = Field(min_length=8, max_length=40)
 
 # Generic request
-class RequestBodyModel(RootModel[Dict[str, Any]]):
+class RequestBodyModel(RootModel[dict[str, Any]]):
     pass
