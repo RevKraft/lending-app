@@ -10,7 +10,7 @@ export const Route = createFileRoute("/_layout")({
   beforeLoad: async () => {
     if (!isLoggedIn()) {
       throw redirect({
-        to: "/login",
+        to: "/landing",
       })
     }
   },
@@ -27,9 +27,13 @@ function Layout() {
           <Spinner size="xl" color="ui.main" />
         </Flex>
       ) : (
-        <Outlet />
+        <Flex flexDirection="column" width="full">
+          <Flex justify="flex-end" align="center" p={4}>
+            <UserMenu />
+          </Flex>
+          <Outlet />
+        </Flex>
       )}
-      <UserMenu />
     </Flex>
   )
 }

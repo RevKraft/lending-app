@@ -17,14 +17,14 @@ import {
 } from "@tanstack/react-router"
 import { FaPlus } from "react-icons/fa"
 import { type SubmitHandler, useForm } from "react-hook-form"
-import Logo from "/assets/images/fastapi-logo.svg"
+import Logo from "/assets/images/logo.svg"
 import { isLoggedIn } from "../hooks/useAuth"
 import { emailPattern } from "../utils"
 import { type UserRegister, UsersService } from "../client"
 import type { ApiError } from "../client/core/ApiError"
 import useCustomToast from "../hooks/useCustomToast"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-//import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "@tanstack/react-router"
 
 
 interface UserRegisterForm extends UserRegister {
@@ -45,7 +45,7 @@ export const Route = createFileRoute("/signup")({
 function Signup() {
   const queryClient = useQueryClient()
   const showToast = useCustomToast()
-  //const navigate = useNavigate()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -70,7 +70,7 @@ function Signup() {
     onSuccess: () => {
       showToast("Success!", "User created successfully.", "success")
       reset()
-      //navigate("/login")
+      navigate({ to: "/login" })
     },
     onError: (err: ApiError) => {
       const errDetail = (err.body as any)?.detail
@@ -101,7 +101,7 @@ function Signup() {
       >
         <Image
           src={Logo}
-          alt="FastAPI logo"
+          alt="RemmitFin logo"
           height="auto"
           maxW="2xs"
           alignSelf="center"

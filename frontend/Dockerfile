@@ -7,6 +7,8 @@ COPY package*.json /app/
 
 RUN npm install
 
+RUN npm install @fontsource/roboto npm install react-country-flag react-i18next i18next
+
 COPY ./ /app/
 
 ARG VITE_API_URL=${VITE_API_URL}

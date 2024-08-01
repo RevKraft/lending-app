@@ -3,8 +3,17 @@ from fastapi import FastAPI
 from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
 
+import logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 from app.api.main import api_router
 from app.core.config import settings
+
+from app.models import (
+    UserRegister,
+    UserCreate,
+)
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:
@@ -31,5 +40,14 @@ if settings.BACKEND_CORS_ORIGINS:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+@app.webhooks.post("new-register")
+def new_register(body: UserRegister):
+    print(body)
+    return {"body": body, "message": "Automatic weebhhok processed"}
+
+@app.webhooks.post("new-user")
+def new_user(body: UserCreate):
+    logger.info(body)
+    return {"body": body, "message": "Automatic weebhhok processed"}
 
 app.include_router(api_router, prefix=settings.API_V1_STR)

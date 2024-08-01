@@ -15,7 +15,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query"
 import { FiLogOut, FiMenu } from "react-icons/fi"
 
-import Logo from "/assets/images/fastapi-logo.svg"
+import Logo from "/assets/images/logo.svg"
 import type { UserPublic } from "../../client"
 import useAuth from "../../hooks/useAuth"
 import SidebarItems from "./SidebarItems"
@@ -52,7 +52,7 @@ const Sidebar = () => {
           <DrawerBody py={8}>
             <Flex flexDir="column" justify="space-between">
               <Box>
-                <Image src={Logo} alt="logo" p={6} />
+                <Image src={Logo} alt="RemmitFin logo" p={6} />
                 <SidebarItems onClose={onClose} />
                 <Flex
                   as="button"
@@ -67,7 +67,7 @@ const Sidebar = () => {
                 </Flex>
               </Box>
               {currentUser?.email && (
-                <Text color={textColor} noOfLines={2} fontSize="sm" p={2}>
+                <Text color={textColor} noOfLines={2} fontSize="2xs" p={2}>
                   Logged in as: {currentUser.email}
                 </Text>
               )}
@@ -93,16 +93,17 @@ const Sidebar = () => {
           borderRadius={12}
         >
           <Box>
-            <Image src={Logo} alt="Logo" w="180px" maxW="2xs" p={6} />
+            <Image src={Logo} alt="RemmitFin logo" w="180px" maxW="2xs" p={6} />
             <SidebarItems />
           </Box>
           {currentUser?.email && (
             <Text
               color={textColor}
               noOfLines={2}
-              fontSize="sm"
+              fontSize="2xs"
               p={2}
               maxW="180px"
+              mb={6}
             >
               Logged in as: {currentUser.email}
             </Text>

@@ -13,11 +13,17 @@ export type HTTPValidationError = {
 
 export type ItemCreate = {
   title: string
+  walletHashId: string
+  status: string
+  regulatoryRegion: string
   description?: string | null
 }
 
 export type ItemPublic = {
   title: string
+  walletHashId: string
+  status: string
+  regulatoryRegion: string
   description?: string | null
   id: number
   owner_id: number
@@ -31,38 +37,99 @@ export type ItemUpdate = {
 export type ItemsPublic = {
 	data: Array<ItemPublic>;
 	count: number;
-};
-
+}
 
 export type TransactionCreate = {
 	title: string;
+  beneficiaryId: string;
+  payout_source_amount: string;
+  payout_source_currency: string;
+  message?: string | null;
+  payment_id?: string | null;
+  system_reference_number?: string | null;
 	description?: string | null;
-};
-
-
+}
 
 export type TransactionPublic = {
 	title: string;
+  beneficiaryId: string;
+  payout_source_amount: string;
+  payout_source_currency: string;
+  message?: string | null;
+  payment_id?: string | null;
+  system_reference_number?: string | null;
 	description?: string | null;
 	id: number;
 	owner_id: number;
-};
-
-
+}
 
 export type TransactionUpdate = {
 	title?: string | null;
+  beneficiaryId: string;
+  payout_source_amount: string;
+  payout_source_currency: string;
+  message?: string | null;
+  payment_id?: string | null;
+  system_reference_number?: string | null;
 	description?: string | null;
-};
-
-
+}
 
 export type TransactionsPublic = {
 	data: Array<TransactionPublic>;
 	count: number;
-};
+}
 
+export type BeneficiaryCreate = {
+	title: string;
+  beneficiaryName: string;
+  beneficiaryAccountType: string;
+  beneficiaryCountryCode: string;
+  destinationCountry: string;
+  destinationCurrency: string;
+  payoutMethod: string;
+  beneficiaryAccountNumber: string;
+  routingCodeType1: string;
+  routingCodeValue1: string;
+  beneficiaryHashId: string | null;
+	description?: string | null;
+}
 
+export type BeneficiaryPublic = {
+	title: string;
+  beneficiaryName: string;
+  beneficiaryAccountType: string;
+  beneficiaryCountryCode: string;
+  destinationCountry: string;
+  destinationCurrency: string;
+  payoutMethod: string;
+  beneficiaryAccountNumber: string;
+  routingCodeType1: string;
+  routingCodeValue1: string;
+  beneficiaryHashId: string | null;
+	description?: string | null;
+	id: number;
+	owner_id: number;
+}
+
+export type BeneficiaryUpdate = {
+	title?: string | null;
+  beneficiaryName: string;
+  beneficiaryAccountType: string;
+  beneficiaryCountryCode: string;
+  destinationCountry: string;
+  destinationCurrency: string;
+  payoutMethod: string;
+  beneficiaryAccountNumber: string;
+  routingCodeType1: string;
+  routingCodeValue1: string;
+  beneficiaryHashId: string | null;
+	description?: string | null;
+}
+
+export type BeneficiariesPublic = {
+	data: Array<BeneficiaryPublic>;
+	count: number;
+}
 
 export type Message = {
   message: string

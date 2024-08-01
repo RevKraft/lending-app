@@ -11,8 +11,10 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  CSSReset,
 } from "@chakra-ui/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { Global } from "@emotion/react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
 import {
@@ -70,6 +72,14 @@ const EditItem = ({ item, isOpen, onClose }: EditItemProps) => {
 
   return (
     <>
+      <CSSReset />
+      <Global
+        styles={`
+          * {
+            font-family: 'Roboto', sans-serif;
+          }
+        `}
+      />
       <Modal
         isOpen={isOpen}
         onClose={onClose}

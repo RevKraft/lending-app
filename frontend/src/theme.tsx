@@ -1,4 +1,17 @@
 import { extendTheme } from "@chakra-ui/react"
+import { Global } from "@emotion/react"
+
+const GlobalStyles = (
+  <Global
+    styles={`
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+      body {
+        font-family: 'Roboto', sans-serif;
+      }
+    `}
+  />
+)
 
 const disabledStyles = {
   _disabled: {
@@ -9,7 +22,7 @@ const disabledStyles = {
 const theme = extendTheme({
   colors: {
     ui: {
-      main: "#009688",
+      main: "#505050",
       secondary: "#EDF2F7",
       success: "#48BB78",
       danger: "#E53E3E",
@@ -19,6 +32,10 @@ const theme = extendTheme({
       dim: "#A0AEC0",
     },
   },
+  fonts: {
+    body: "Roboto, sans-serif",
+    heading: "Roboto, sans-serif",
+  },
   components: {
     Button: {
       variants: {
@@ -26,7 +43,7 @@ const theme = extendTheme({
           backgroundColor: "ui.main",
           color: "ui.light",
           _hover: {
-            backgroundColor: "#00766C",
+            backgroundColor: "#718096",
           },
           _disabled: {
             ...disabledStyles,
@@ -58,4 +75,5 @@ const theme = extendTheme({
   },
 })
 
+export { GlobalStyles }
 export default theme
