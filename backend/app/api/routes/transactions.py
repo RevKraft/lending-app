@@ -5,12 +5,12 @@ from sqlmodel import func, select
 
 from app.api.deps import CurrentUser, SessionDep
 from app.models import (
+    Message,
     Transaction,
     TransactionCreate,
     TransactionPublic,
     TransactionsPublic,
     TransactionUpdate,
-    Message
 )
 
 router = APIRouter()
