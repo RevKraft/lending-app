@@ -1,14 +1,13 @@
-from typing import Any
-
+import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-import emails  # type: ignore
-from jinja2 import Template
-import jwt
-from jwt.exceptions import InvalidTokenError
-import logging
 from pathlib import Path
 from typing import Any
+
+import emails  # type: ignore
+import jwt
+from jinja2 import Template
+from jwt.exceptions import InvalidTokenError
 
 from app.core.config import settings
 from app.models import UserCreate
