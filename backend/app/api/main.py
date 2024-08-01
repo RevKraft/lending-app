@@ -1,13 +1,15 @@
+# Third-party imports
 from fastapi import APIRouter
 
+# Local application imports
 from app.api.routes import (
+    beneficiaries,
     items,
     login,
+    transactions,
     users,
     utils,
-    transactions,
-    beneficiaries,
-    webhooks
+    webhooks,
 )
 
 api_router = APIRouter()
