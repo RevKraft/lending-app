@@ -6,20 +6,17 @@ from typing import Any
 
 import emails  # type: ignore
 import jwt
+from app.core.config import settings
 from jinja2 import Template
 from jwt.exceptions import InvalidTokenError
 
-from app.core.config import settings
-
-import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-from typing import Dict, Any
+from typing import Any, Dict
 
-from app.models import (
-    UserCreate,
-)
+from app.models import UserCreate
+
 
 @dataclass
 class EmailData:
